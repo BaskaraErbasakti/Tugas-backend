@@ -1,6 +1,6 @@
 # Tugas-backend
 
-Belajar backend
+Belajar API
 
 # Requirements
 1. NodeJS
