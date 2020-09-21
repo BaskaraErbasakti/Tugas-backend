@@ -14,9 +14,10 @@ Product.GetAll = () => {
     })
 }
 
-Product.Add = (name, stok, price) => {
+Product.Add = (datas) => {
+    console.log(datas)
     database
-        .query(`INSERT INTO public.produk (name, stok, price) VALUES ('${name}', ${stok}, '${price}')`)
+        .query(`INSERT INTO public.produk (name, stok, price, images, image_tittle, target, category) VALUES ('${datas.name}', ${datas.stok}, ${datas.price}, '${datas.images}', '${datas.image_tittle}', '${datas.target}', '${datas.category}')`)
         .then((res) => {
             console.log(res)
             return "Data berhasil di tambah"
@@ -27,9 +28,9 @@ Product.Add = (name, stok, price) => {
         })
 }
 
-Product.Edit = (id, name, stok, price) => {
+Product.Edit = (id, name, stok, price, images) => {
     database
-        .query(`UPDATE public.produk SET name='${name}', stok=${stok}, price='${price}' WHERE id=${id};`)
+        .query(`UPDATE public.produk SET name='${name}', stok=${stok}, price='${price}', images='${images}' WHERE id=${id};`)
         .then((res) => {
             console.log(res)
             return "Data berhasil di update"
@@ -68,11 +69,11 @@ Product.search = (name) => {
     })
 }
 
-Product.sort = (table, sort) => {
+Product.sort = (sort) => {
     return new Promise((resolve, reject) => {    
         database
         .query(
-            `SELECT * FROM public.${table} ORDER BY ${sort} ASC`)
+            `SELECT * FROM public.produk ORDER BY ${sort} ASC`)
         .then((res) => {
             resolve(res)
         })
