@@ -1,4 +1,4 @@
-const model = require("../Model/product")
+const model = require("../model/product")
 const redis = require("../config/redis")
 const respone = require('../helpers/respon')
 const Product = {}
