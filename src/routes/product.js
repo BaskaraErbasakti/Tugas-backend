@@ -1,5 +1,5 @@
 const express = require("express")
-const controller = require("../Controller/product")
+const controller = require("../controller/product")
 const validate = require("../middleware/validate")
 const admin = require("../middleware/admin")
 const chache = require("../middleware/chace")
