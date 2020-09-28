@@ -13,7 +13,7 @@ const path = require('path')
 const port = 9000
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'accessnode.log'), { flags: 'a' })
-app.use(morgan('combined', { stream: accessLogStream }))
+server.use(morgan('combined', { stream: accessLogStream }))
 server.use(corss())
 server.use(bodyParser.urlencoded({extended: false}))
 server.use(bodyParser.json())
