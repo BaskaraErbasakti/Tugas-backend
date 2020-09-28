@@ -7,9 +7,13 @@ const morgan = require('morgan')
 const routes = require("./src/main")
 const database = require("./src/config/database")
 const redis = require('./src/config/redis')
+const fs = require('fs')
+const path = require('path')
 
 const port = 9000
 
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'accessnode.log'), { flags: 'a' })
+app.use(morgan('combined', { stream: accessLogStream }))
 server.use(corss())
 server.use(bodyParser.urlencoded({extended: false}))
 server.use(bodyParser.json())
