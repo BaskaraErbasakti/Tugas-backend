@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+    postgres:
+        container_name: postgres
+        image: postgres:latest
+        ports:
+            - 5432:5432
+        environment: 
+            POSTGRES_PASSWORD : example
+    redis:
+        container_name: redis
+        image: redis:latest
+        ports:
+            - 6379:6379
+    api:
+        container_name: api
+        image: baskaraerbasakti/api:latest
+        ports:
+            - 9000:9000
+        depends_on: 
+            - redis
+            - postgres
+    vue:
+        container_name: vue
+        image: baskaraerbasakti/vue:latest
+        ports:
+            - 8080:8080
