@@ -5,23 +5,65 @@ services:
         image: postgres:latest
         ports:
             - 5432:5432
-        environment: 
-            POSTGRES_PASSWORD : example
+        environment:
+            - POSTGRES_USER=tugas1 
+            - POSTGRES_PASSWORD=abcd1234
+            - POSTGRES_DB=produk
+        networks: 
+            - koneksi
+        volumes:
+            - ./postgres-data:/var/lib/postgresql/data
     redis:
         container_name: redis
         image: redis:latest
         ports:
             - 6379:6379
-    api:
-        container_name: api
-        image: baskaraerbasakti/api:latest
+        command: redis-server --requirepass abcd1234
+        networks: 
+            - koneksi
+        volumes:
+            - ./redis-data:/var/lib/redis
+    backend:
+        container_name: backend
+        image: baskaraerbasakti/backend:latest
         ports:
             - 9000:9000
         depends_on: 
             - redis
             - postgres
+        networks: 
+            - koneksi
+        environment: 
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
+            - REDIS_PASSWORD=abcd1234
+            - DB_HOST=postgres
+            - DB_USER=tugas1
+            - DB_PASSWORD=abcd1234
+            - DB_DATABASE=produk
+            - JWT_KEYS=sakti
+  
     vue:
         container_name: vue
         image: baskaraerbasakti/vue:latest
         ports:
             - 8080:8080
+        networks: 
+            - koneksi
+        environment:
+            - VUE_APP_BASE_URL=http://backend:9000/product     
+    nginx:
+        container_name: nginx
+        image: nginx:latest
+        ports:
+            - 80:80
+        volumes:
+            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+
+networks:
+    koneksi:
+        driver: bridge
+
+volumes:
+    postgres-data:
+    redis-data:

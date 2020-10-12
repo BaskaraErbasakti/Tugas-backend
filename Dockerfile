@@ -1,12 +1,14 @@
-FROM node:lts-alpine
+FROM node:latest
 
-WORKDIR /app
+RUN mkdir -p /usr/app
 
-COPY package*.json .
+WORKDIR /usr/app
 
-RUN npm install
+COPY package.json .
 
 COPY . .
+
+RUN npm install
 
 EXPOSE 9000
 
