@@ -92,7 +92,7 @@ pipeline {
         stage('Deploy on production') {
             when {
                 expression {
-                    params.CICD == 'CICD Production' && BRANCH_NAME == 'Prod'
+                    params.CICD == 'CICD' && BRANCH_NAME == 'Prod'
                 }
             }
             steps {
