@@ -80,7 +80,7 @@ pipeline {
                                 sshTransfer(
                                     sourceFiles: 'docker-compose.yml',
                                     remoteDirectory: 'backend',
-                                    execCommand: 'cd backend; docker-compose up -d',
+                                    execCommand: 'cd backend; docker stop vue; docker-compose up -d',
                                     execTimeout: 120000,
                                 )
                             ]
@@ -106,7 +106,7 @@ pipeline {
                                     sshTransfer(
                                         sourceFiles: 'docker-compose.yml',
                                         remoteDirectory: 'backend',
-                                        execCommand: 'cd backend; docker-compose up -d',
+                                        execCommand: 'cd backend; docker stop vue; docker-compose up -d',
                                         execTimeout: 120000,
                                     )
                                 ]
