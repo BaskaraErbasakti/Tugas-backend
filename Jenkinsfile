@@ -80,7 +80,7 @@ pipeline {
                                 sshTransfer(
                                     sourceFiles: 'docker-compose.yml',
                                     remoteDirectory: 'backend',
-                                    execCommand: 'cd backend && docker-compose up -d',
+                                    execCommand: 'cd backend; docker-compose up -d',
                                     execTimeout: 120000,
                                 )
                             ]
@@ -100,7 +100,7 @@ pipeline {
                     sshPublisher(
                         publishers: [
                             sshPublisherDesc(
-                                configName: 'production',
+                                configName: 'Production',
                                 verbose: false,
                                 transfers: [
                                     sshTransfer(
