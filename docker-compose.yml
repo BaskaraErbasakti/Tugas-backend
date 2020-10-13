@@ -44,7 +44,7 @@ services:
             - JWT_KEYS=sakti
   
     vue:
-        container_name: vue
+        container_name: frontend
         image: baskaraerbasakti/vue:latest
         ports:
             - 8080:8080
@@ -52,13 +52,6 @@ services:
             - koneksi
         environment:
             - VUE_APP_BASE_URL=http://backend:9000/product     
-    nginx:
-        container_name: nginx
-        image: nginx:latest
-        ports:
-            - 80:80
-        volumes:
-            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
 
 networks:
     koneksi:
